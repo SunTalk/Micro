@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char const *argv[])
+{
+	
+	#ifdef DBG
+	freopen("A.in","r",stdin);
+	freopen("A.out","w",stdout);
+	#endif
+
+	return 0;
+}
