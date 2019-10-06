@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 	char word[4];
 
 	for(int i = 0; i < 4 ; i++)
-		scanf("%c",&word[i]);
+		scanf("%c ",&word[i]);
 
 	for(int i = 0; i < 4 ; i++){
 
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 			unsigned int tmp = num<<j;
 			tmp = tmp>>31;
 			printf("%u",tmp);
-			if( (j+1)%8 == 0 )
+			if( (j+1)%8 == 0 && j != 31 )
 				printf(" ");
 		}
 		printf("\n");
@@ -38,11 +38,12 @@ int main(int argc, char const *argv[])
 		tmp = tmp<<((3-i)*8);
 		num += tmp;
 	}
+	printf("%u = ",num);
 	for(int j = 0 ; j < 32 ; j++ ){
 		unsigned int tmp = num<<j;
 		tmp = tmp>>31;
 		printf("%u",tmp);
-		if( (j+1)%8 == 0 )
+		if( (j+1)%8 == 0 && j != 31 )
 			printf(" ");
 	}
 	printf("\n");
