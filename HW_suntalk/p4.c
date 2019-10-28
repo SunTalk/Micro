@@ -1,6 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void PB(unsigned int k){
+	printf("%u = ",k);
+	for(int j = 0 ; j < 32 ; j++ ){
+		unsigned int tmp = k<<j;
+		tmp = tmp>>31;
+		printf("%u",tmp);
+		if( (j+1)%8 == 0 && j != 31 )
+			printf(" ");
+	}
+	printf("\n");
+}
+
+unsigned int ADD(unsigned int a, unsigned int b){
+	a = a<<8;
+	a += b;
+	return a;
+}
+
 int main(int argc, char const *argv[])
 {
 	
@@ -17,36 +35,21 @@ int main(int argc, char const *argv[])
 
 	for(int i = 0; i < 4 ; i++){
 
-		printf("%c:\n%u = ",word[i], word[i]);
+		printf("%c:\n",word[i]);
 		num = (unsigned int)word[i];
-		// printf("%u\n",num);
-		for(int j = 0 ; j < 32 ; j++ ){
-			unsigned int tmp = num<<j;
-			tmp = tmp>>31;
-			printf("%u",tmp);
-			if( (j+1)%8 == 0 && j != 31 )
-				printf(" ");
-		}
-		printf("\n");
+		PB(num);
 
 	}
 
 	printf("'%c' and '%c' and '%c' and '%c' packed in an unsigned int:\n",word[0],word[1],word[2],word[3]);
+	
 	num = 0;
 	for(int i = 0 ; i < 4 ; i++ ){
 		unsigned int tmp = word[i];
-		tmp = tmp<<((3-i)*8);
-		num += tmp;
+		num = ADD(num,tmp);
 	}
-	printf("%u = ",num);
-	for(int j = 0 ; j < 32 ; j++ ){
-		unsigned int tmp = num<<j;
-		tmp = tmp>>31;
-		printf("%u",tmp);
-		if( (j+1)%8 == 0 && j != 31 )
-			printf(" ");
-	}
-	printf("\n");
+
+	PB(num);
 
 	return 0;
 }
